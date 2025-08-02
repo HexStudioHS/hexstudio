@@ -39,7 +39,7 @@ export default function Footer() {
             <Button href="https://www.instagram.com/hexstudio_?igsh=MTE2ZGw2ZXQ0OTk0eA==" type="link" target="_blank" className="flex text-lg text-gray-400 font-light hover:underline" isExternal>
               Instagram
             </Button>
-            <Button href="https://www.linkedin.com/in/hexstudio-pvt-ltd/" type="link" target="_blank" className="flex text-lg text-gray-400 font-light hover:underline" isExternal>
+            <Button href="https://www.linkedin.com/in/hexstudiohs/" type="link" target="_blank" className="flex text-lg text-gray-400 font-light hover:underline" isExternal>
               LinkedIn
             </Button>
             <Button href="https://x.com/_hexstudio_" type="link" target="_blank" className="flex text-lg text-gray-400 font-light hover:underline" isExternal>
