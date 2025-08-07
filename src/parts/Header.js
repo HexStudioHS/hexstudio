@@ -18,9 +18,11 @@ export default function Header() {
   const path = location.pathname;
 
   return (
-    <header className="header relative z-50">
+    <header className="header sticky top-0 z-50 bg-white shadow-sm">
+
       {/* Top Row */}
-      <div className="flex justify-between items-center px-4 py-4 lg:px-10">
+      <div className="flex justify-between items-center px-4 py-2 lg:px-10 lg:py-4">
+
         <BrandIcon />
 
         {/* Hamburger button */}
