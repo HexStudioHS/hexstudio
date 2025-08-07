@@ -36,7 +36,7 @@ export const Services = [
     animation: 'left',
   },
   {
-    title: 'Digital Marketing',
+    title: 'UI/UX Design',
     imageUrl: Mobile,
     animation: 'up',
   },
