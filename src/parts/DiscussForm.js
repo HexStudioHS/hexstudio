@@ -6,7 +6,6 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable react/prop-types */
 import React from 'react';
-
 import { Fade } from 'react-awesome-reveal';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as emailjs from '@emailjs/browser';
@@ -20,10 +19,18 @@ import Button from 'elements/Button';
 
 export const DiscussForm = (actions) => {
   const { data, resetForm } = actions;
+
   const submitEmail = () => {
     const {
       name, company, email, phone, projectIdea,
     } = data;
+
+    // Phone number validation
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(phone)) {
+      toast.error('Please enter a valid 10-digit phone number.');
+      return;
+    }
 
     const templateParams = {
       from_name: `${name} - ${company} ( ${phone} - ${email} )`,
@@ -45,13 +52,13 @@ export const DiscussForm = (actions) => {
         'zsm5IZtdLtOdwnyI2',
       )
         .then(() => {
-          toast.success('Success! we\'\ll get back to you soon. Thank you!');
+          toast.success("Success! We'll get back to you soon. Thank you!");
           resetForm();
         }, (error) => {
           toast.error(error);
         });
     } else {
-      toast.error('Please fill out the blank form.');
+      toast.error('Please fill out all the fields.');
     }
   };
 
@@ -64,8 +71,7 @@ export const DiscussForm = (actions) => {
 
       <Fade direction="up" triggerOnce>
         <p className="font-light text-lg text-gray-400 text-center mb-12">
-          {/* eslint-disable-next-line react/no-unescaped-entities */}
-          Please fill out the form below to discuss your project and we'll get back to you in less than 24 hours.
+         Please fill out the form below to discuss your project and we&apos;ll get back to you in less than 24 hours.
         </p>
       </Fade>
 
@@ -98,18 +104,23 @@ export const DiscussForm = (actions) => {
               name="email"
               type="email"
               value={data.email}
-              placeholder="Your email address"
+              placeholder="aaaa@gmail.com"
               className=""
               onChange={actions.onChange}
             />
             <Form
               id="phone"
               name="phone"
-              type="number"
+              type="tel" // Changed from "number" to "tel"
+              pattern="[0-9]{10}"
               value={data.phone}
-              placeholder="Your contact number"
-              className=""
-              onChange={actions.onChange}
+              placeholder="Your 10-digit contact number"
+              className="no-arrow"
+              onChange={(e) => {
+                // Allow only numbers
+                const cleanedValue = e.target.value.replace(/\D/g, '');
+                actions.onChange({ target: { name: 'phone', value: cleanedValue } });
+              }}
             />
           </div>
 
@@ -136,6 +147,19 @@ export const DiscussForm = (actions) => {
 
       <ToastContainer />
 
+      {/* Remove arrows for number inputs in all browsers */}
+      <style>
+        {`
+          input[type=number]::-webkit-inner-spin-button, 
+          input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+          input[type=number] {
+            -moz-appearance: textfield;
+          }
+        `}
+      </style>
     </section>
   );
 };
